@@ -1,7 +1,4 @@
-from curses import flash
-from email import iterators
-from typing import Iterator
-
+from collections.abc import Iterable
 
 def ft_map(function_to_apply, iterable):
     """Map the function to all elements of the iterable.
@@ -12,31 +9,27 @@ def ft_map(function_to_apply, iterable):
     An iterable.
     None if the iterable can not be used by the function.
     """
-    valid:False
+    valid:bool = False
     if isinstance(iterable, list) == True:
         valid = True
     if isinstance(iterable, tuple) == True:
         valid = True
-    if isinstance(iterable, Iterator) == True:
+    if isinstance(iterable, Iterable) == True:
         valid = True
 
     if valid == False:
-        raise Exception("ERROR")
+        raise TypeError("ERROR the type is not iterable")
     
-    res:list = []
-
-    res.append(function_to_apply(elt) for elt in iterable)
-    return res
+    for elt in iterable:
+        yield(function_to_apply(elt))
 
 
 # Example 1:
 x = [1, 2, 3, 4, 5]
-ft_map(lambda dum: dum + 1, x)
+# test:int = 0
+print(ft_map(lambda dum: dum + 1, x))
 # Output:
 # <generator object ft_map at 0x7f708faab7b0> # The adress will be different
-
-res = ft_map(lambda t: t + 1, x)
-print(res)
-print(list(res))
+print(list(ft_map(lambda t: t + 1, x)))
 # Output:
-# [2, 3, 4, 5, 6]
+[2, 3, 4, 5, 6]
