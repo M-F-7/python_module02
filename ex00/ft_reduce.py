@@ -24,9 +24,9 @@ def ft_reduce(function, iterable):
     if valid == False:
         raise TypeError("ERROR the type is not iterable")
     
-    
     it = iter(iterable)
     value = next(it)
+    #le pointeur it avance sur le deuxieme elt
     for nextelt in it:
         value = function(value, nextelt)
     return value
