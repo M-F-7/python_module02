@@ -26,7 +26,7 @@ def ft_reduce(function, iterable):
     
     it = iter(iterable)
     value = next(it)
-    #le pointeur it avance sur le deuxieme elt
+    #decale le pointeur it avance sur le deuxieme elt
     for nextelt in it:
         value = function(value, nextelt)
     return value
